@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +13,9 @@ const Header = () => {
   // Toggle for sign in / login dropdown
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
+  };
+  const closeDropdown = () => {
+    setDropdownOpen(false);
   };
 
   return (
@@ -27,9 +31,14 @@ const Header = () => {
               >
                 {/* Placeholder for the logo */}
                 {/* <div className="h-8 w-44 bg-gray-300 rounded-md" /> */}
-                <p className=" text-black font-medium text-[24px] font-Poppins hover:text-gray-900 focus:outline-none">
-                  ElderlyCare
-                </p>
+                <Link to="/">
+                  <p
+                    className=" text-black font-medium text-[24px] font-Poppins hover:text-gray-900 focus:outline-none"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
+                    ElderlyCare
+                  </p>
+                </Link>
               </a>
             </div>
           </div>
@@ -75,40 +84,50 @@ const Header = () => {
           </div> */}
           <div className="hidden md:flex items-center space-x-1">
             <ul className="flex flex-row gap-20 justify-center text-center pr-20">
-              <li className="text-black font-medium text-[16px] font-Poppins hover:text-gray-900 focus:outline-none">
-                Home
-              </li>
-              <li className="text-black font-medium text-[16px] font-Poppins hover:text-gray-900 focus:outline-none">
-                About
-              </li>
-              <li className="text-black font-medium text-[16px] font-Poppins hover:text-gray-900 focus:outline-none">
-                Contact
-              </li>
+              <Link to="/">
+                <li className="text-black font-medium text-[16px] font-Poppins hover:text-gray-900 focus:outline-none">
+                  Home
+                </li>
+              </Link>
+              <Link to="/about">
+                <li className="text-black font-medium text-[16px] font-Poppins hover:text-gray-900 focus:outline-none">
+                  About
+                </li>
+              </Link>
+              <Link to="/contact">
+                <li className="text-black font-medium text-[16px] font-Poppins hover:text-gray-900 focus:outline-none">
+                  Contact
+                </li>
+              </Link>
             </ul>
             <div className="relative">
               <button
                 onClick={toggleDropdown}
-                className="font-medium text-[24px] hover:text-gray-900 focus:outline-none w-32 h-10 bg-[#0c376f] text-white font-Poppins text-xl rounded-md"
+                className="font-medium text-[24px] hover:text-gray-900 hover:bg-green-500 focus:outline-none w-32 h-10 bg-[#0c376f] text-white font-Poppins text-xl rounded-md"
               >
                 Sign up
               </button>
               {/* Dropdown Menu */}
-              {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100 font-Poppins"
-                  >
-                    Sign up as <br /> User
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100 font-Poppins"
-                  >
-                    Sign up as Caretaker
-                  </a>
-                </div>
-              )}
+              <div onMouseLeave={closeDropdown}>
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
+                    <Link
+                      to="/signupasuser"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 font-Poppins"
+                      onClick={() => window.scrollTo(0, 0)}
+                    >
+                      Sign up as <br /> User
+                    </Link>
+                    <Link
+                      to="/singupascaretaker"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 font-Poppins"
+                      onClick={() => window.scrollTo(0, 0)}
+                    >
+                      Sign up as Caretaker
+                    </Link>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 

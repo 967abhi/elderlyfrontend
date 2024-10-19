@@ -9,6 +9,9 @@ import Layout from "../Layout";
 import SignupuserPage from "../pages/SignupuserPage";
 // import Singupforcaretaker from "../components/singupforcaretaker";
 import Signupcaretaker from "../pages/Signupcaretaker";
+import Loginascaretaker from "../components/Login/Loginascaretaker";
+import DashboardCaretaker from "../pages/DashboardCaretaker";
+import Loginasuser from "../components/Login/Loginasuser";
 
 const AppRoutes = () => {
   return (
@@ -21,6 +24,9 @@ const AppRoutes = () => {
           <Route path="*" element={<NotFound />} />
           <Route path="/signupasuser" element={<SignupuserPage />} />
           <Route path="/singupascaretaker" element={<Signupcaretaker />} />
+          <Route path="/loginascaretaker" element={<Loginascaretaker />} />
+          <Route path="/loginasuser" element={<Loginasuser />} />
+          <Route path="/userfeed" element={<DashboardCaretaker />} />
         </Route>
       </Routes>
     </Router>

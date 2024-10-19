@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./signupform.css";
 
 const SignupForm = ({ role }) => {
@@ -268,12 +268,12 @@ const SignupForm = ({ role }) => {
             </button>
             <p className="text-base font-medium text-black ">
               Already have an account?{" "}
-              <a
-                href="#"
+              <Link
+                to="/loginasuser"
                 className="font-medium text-primary-600 hover:underline dark:text-primary-500"
               >
                 Login here
-              </a>
+              </Link>
             </p>
           </form>
         </div>

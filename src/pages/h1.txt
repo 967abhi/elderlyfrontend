@@ -1,0 +1,99 @@
+import React, { useState } from "react";
+
+const DashboardCaretaker = () => {
+  const [caretakers, setCaretakers] = useState([]);
+  const [pincode, setPincode] = useState("");
+  const [error, setError] = useState(null);
+
+  // Fetch caretakers based on pincode
+  const fetchCaretakers = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      console.error("No token found");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/enterthepincode", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ pincode }), // Send pincode in the request body
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message);
+        throw new Error(data.message || "Error fetching caretakers");
+      }
+
+      console.log("Fetched caretakers data:", data);
+
+      if (data.data && Array.isArray(data.data)) {
+        setCaretakers(data.data); // Set caretakers to the state
+        setError(null); // Reset error
+      } else {
+        setError("No caretakers found");
+        console.error("Fetched data is not an array:", data);
+      }
+    } catch (error) {
+      console.error("Error fetching caretakers:", error);
+      setError("An error occurred while fetching caretakers.");
+    }
+  };
+
+  // Handle search button click
+  const handleSearch = () => {
+    if (pincode) {
+      fetchCaretakers();
+    } else {
+      setError("Please enter a pincode");
+    }
+  };
+
+  return (
+    <div className="caretaker-search-container">
+      <h2>Search Caretakers by Pincode</h2>
+      <input
+        type="text"
+        placeholder="Enter pincode"
+        value={pincode}
+        onChange={(e) => setPincode(e.target.value)}
+        className="pincode-input"
+      />
+      <button
+        onClick={handleSearch}
+        className="search-button bg-blue-500 text-white px-4 py-2 rounded-md"
+      >
+        Search
+      </button>
+
+      {/* Show error message if any */}
+      {error && <p className="error-message text-red-500">{error}</p>}
+
+      {/* Display fetched caretaker data */}
+      {caretakers.length > 0 ? (
+        <ul className="caretaker-list mt-[25px]">
+          {caretakers.map((caretaker, index) => (
+            <li key={index} className="caretaker-item">
+              <h3>{caretaker.name}</h3> <h3>firstname:{caretaker.firstname}</h3>
+              {/* Adjust according to your data structure */}
+              <p>Pincode: {caretaker.pincode}</p>{" "}
+              {/* Add any other relevant fields */}
+              <p>Status: {caretaker.status}</p>{" "}
+              {/* Add any other relevant fields */}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No caretakers found for this pincode</p>
+      )}
+    </div>
+  );
+};
+
+export default DashboardCaretaker;

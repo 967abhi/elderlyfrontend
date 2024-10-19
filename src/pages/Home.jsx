@@ -1,12 +1,12 @@
 import home from "../assets/banner.png";
-import {
-  FaClipboardCheck,
-  FaHeart,
-  FaClipboardList,
-  FaUserFriends,
-  FaTint,
-  FaHome,
-} from "react-icons/fa";
+// import {
+//   FaClipboardCheck,
+//   FaHeart,
+//   FaClipboardList,
+//   FaUserFriends,
+//   FaTint,
+//   FaHome,
+// } from "react-icons/fa";
 import KhyaalClubBenefits from "../components/KhyaalClubBenefits";
 
 const services = [
@@ -14,36 +14,36 @@ const services = [
     title: "Hourly Care",
     description:
       "With our hourly-based care you will never have to face an emergency alone!",
-    icon: <FaClipboardCheck size={48} />,
+    // icon: <FaClipboardCheck size={48} />,
   },
   {
     title: "Live-in Care",
     description:
       "When we're required to provide 24/7 care, live-in is the best option to go for!",
-    icon: <FaHeart size={48} />,
+    // icon: <FaHeart size={48} />,
   },
   {
     title: "Overnight Care",
     description:
       "Designed specifically for cases when acute temporary oversight is needed.",
-    icon: <FaClipboardList size={48} />,
+    // icon: <FaClipboardList size={48} />,
   },
   {
     title: "Alzheimer’s Care",
     description:
       "We take care of both the elderly people with Alzheimer’s and Dementia.",
-    icon: <FaUserFriends size={48} />,
+    // icon: <FaUserFriends size={48} />,
   },
   {
     title: "Nursing Care",
     description:
       "Provided on an as-required basis, it is usually for post-accident care.",
-    icon: <FaTint size={48} />,
+    // icon: <FaTint size={48} />,
   },
   {
     title: "Palliative Care",
     description: "This service includes all types of permanent caregiving.",
-    icon: <FaHome size={48} />,
+    // icon: <FaHome size={48} />,
   },
 ];
 

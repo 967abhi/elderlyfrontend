@@ -1,23 +1,19 @@
-// import React from 'react'
-
-// const singupforcaretaker = () => {
-//   return (
-//     <div>singupforcaretaker</div>
-//   )
-// }
-
-// export default singupforcaretaker
-// =====
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./signupform.css";
 
-const Singupforcaretaker = ({ role }) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+const Signupforcaretaker = ({ role }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
-    phoneNumber: "",
+    phonenumber: "",
+    age: "",
+    gender: "",
+    address: "",
+    pincode: "",
   });
 
   const handleChange = (e) => {
@@ -28,10 +24,37 @@ const Singupforcaretaker = ({ role }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(`${role} Signup Data:`, formData);
-    // Handle form submission logic here (e.g., API call)
+
+    // Ensure age and pincode are sent as numbers
+    const dataToSend = {
+      ...formData,
+      age: Number(formData.age), // Convert age to number
+      pincode: Number(formData.pincode), // Convert pincode to number
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/signupcaretaker", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json(); // Get the error response from the server
+        throw new Error(`Error: ${response.status} ${errorData.message || ""}`);
+      }
+
+      const data = await response.json();
+      console.log("Response from server:", data);
+      navigate("/loginascaretaker");
+    } catch (error) {
+      console.error("Error submitting the form:", error);
+    }
   };
 
   return (
@@ -42,23 +65,43 @@ const Singupforcaretaker = ({ role }) => {
             Create an account as a {role}
           </h1>
           <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
-            <div>
-              <label
-                htmlFor="name"
-                className="block mb-2 text-sm font-medium font-Poppins text-black"
-              >
-                Name
-              </label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Your Name"
-                required
-              />
+            <div className="flex flex-row justify-between">
+              <div>
+                <label
+                  htmlFor="firstname"
+                  className="block mb-2 text-sm font-medium font-Poppins text-black"
+                >
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  name="firstname"
+                  id="firstname"
+                  value={formData.firstname}
+                  onChange={handleChange}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Your First Name"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="lastname"
+                  className="block mb-2 text-sm font-medium font-Poppins text-black"
+                >
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  name="lastname"
+                  id="lastname"
+                  value={formData.lastname}
+                  onChange={handleChange}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Your Last Name"
+                  required
+                />
+              </div>
             </div>
             <div>
               <label
@@ -96,23 +139,105 @@ const Singupforcaretaker = ({ role }) => {
                 required
               />
             </div>
+
+            <div className="flex flex-row justify-between">
+              <div>
+                <label
+                  htmlFor="phonenumber"
+                  className="block mb-2 text-sm font-medium text-black"
+                >
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  name="phonenumber"
+                  id="phonenumber"
+                  value={formData.phonenumber}
+                  onChange={handleChange}
+                  className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Your Phone Number"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="age"
+                  className="block mb-2 text-sm font-medium text-black"
+                >
+                  Age
+                </label>
+                <input
+                  type="number"
+                  name="age"
+                  id="age"
+                  value={formData.age}
+                  onChange={handleChange}
+                  className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Your Age"
+                  required
+                />
+              </div>
+            </div>
+            <div className="flex flex-row justify-between">
+              <div>
+                <label
+                  htmlFor="address"
+                  className="block mb-2 text-sm font-medium text-black"
+                >
+                  Address
+                </label>
+                <input
+                  type="text"
+                  name="address"
+                  id="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Your Address"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="pincode"
+                  className="block mb-2 text-sm font-medium text-black"
+                >
+                  Pincode
+                </label>
+                <input
+                  type="number"
+                  name="pincode"
+                  id="pincode"
+                  value={formData.pincode}
+                  onChange={handleChange}
+                  className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Your Pincode"
+                  required
+                />
+              </div>
+            </div>
             <div>
               <label
-                htmlFor="phoneNumber"
+                htmlFor="gender"
                 className="block mb-2 text-sm font-medium text-black"
               >
-                Phone Number
+                Gender
               </label>
-              <input
-                type="tel"
-                name="phoneNumber"
-                id="phoneNumber"
-                value={formData.phoneNumber}
+              <select
+                name="gender"
+                id="gender"
+                value={formData.gender}
                 onChange={handleChange}
-                className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:text-black  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Your Phone Number"
+                className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required
-              />
+              >
+                <option value="" disabled>
+                  Select Gender
+                </option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
             </div>
             <div className="flex items-start">
               <div className="flex items-center h-5">
@@ -141,14 +266,14 @@ const Singupforcaretaker = ({ role }) => {
             >
               Create an account as {role}
             </button>
-            <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+            <p className="text-base font-medium text-black ">
               Already have an account?{" "}
-              <a
-                href="#"
+              <Link
+                to="/loginascaretaker"
                 className="font-medium text-primary-600 hover:underline dark:text-primary-500"
               >
                 Login here
-              </a>
+              </Link>
             </p>
           </form>
         </div>
@@ -157,4 +282,4 @@ const Singupforcaretaker = ({ role }) => {
   );
 };
 
-export default Singupforcaretaker;
+export default Signupforcaretaker;

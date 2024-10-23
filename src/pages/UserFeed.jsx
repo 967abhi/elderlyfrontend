@@ -23,7 +23,7 @@ const UserFeed = () => {
           setLoading(false);
         }
       } catch (error) {
-        setError("An error occurred while fetching caretaker data");
+        setError("An error occurred while fetching caretaker data", error);
         setLoading(false);
       }
     };

@@ -1,6 +1,7 @@
 // ===========================
 import { useEffect, useState } from "react";
 import home from "../assets/feed.png";
+import { useNavigate } from "react-router";
 const StepCard = ({ stepNumber, title, description, imgSrc }) => {
   return (
     <div className="flex flex-col items-center justify-center bg-white shadow-md p-4 rounded-lg font-Poppins">
@@ -16,6 +17,10 @@ const DashboardCaretaker = () => {
   const [caretakers, setCaretakers] = useState([]);
   const [pincode, setPincode] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const handleBookNow = (id) => {
+    navigate(`/userfeed/${id}`);
+  };
 
   const steps = [
     {
@@ -134,9 +139,9 @@ const DashboardCaretaker = () => {
           {/* adding affordable section  */}
           <div className="mt-12">
             <div>
-              <div className="flex justify-center font-Poppins font-semibold text-2xl">
+              {/* <div className="flex justify-center font-Poppins font-semibold text-2xl">
                 <h1>How it Works</h1>
-              </div>
+              </div> */}
             </div>
             <div className="flex flex-row justify-between">
               <div className="max-w-6xl  mx-auto py-10 px-4">
@@ -157,83 +162,6 @@ const DashboardCaretaker = () => {
               </div>
             </div>
           </div>
-
-          {/* adding affordable section  */}
-          {/* testing */}
-
-          {/* testing */}
-
-          {/* <div className="max-w-screen-xl mx-auto px-4">
-            <h1 className="text-2xl font-bold mb-6">Caretaker Feed</h1>
-            {caretakers.length > 0 ? (
-              <ul className="space-y-4">
-                {caretakers.map((caretaker, index) => (
-                  <li key={index} className="p-4 border rounded-lg shadow">
-                    <p className="text-md">
-                      <strong>First Name:</strong> {caretaker.firstname}
-                    </p>
-                    <p className="text-md">
-                      <strong>Last Name:</strong> {caretaker.lastname || "N/A"}
-                    </p>
-                    <p className="text-md">
-                      <strong>Age:</strong> {caretaker.age}
-                    </p>
-                    <p className="text-md">
-                      <strong>Email:</strong> {caretaker.email || "N/A"}
-                    </p>
-                    <p className="text-md">
-                      <strong>Address:</strong> {caretaker.address || "N/A"}
-                    </p>
-                    <p className="text-md">
-                      <strong>Phone Number:</strong>{" "}
-                      {caretaker.phonenumber || "N/A"}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No caretakers found.</p>
-            )}
-          </div> */}
-          {/* =============== */}
-          {/* <div className="caretaker-search-container">
-            <h2>Search Caretakers by Pincode</h2>
-            <input
-              type="text"
-              placeholder="Enter pincode"
-              value={pincode}
-              onChange={(e) => setPincode(e.target.value)}
-              className="pincode-input"
-            />
-            <button
-              onClick={handleSearch}
-              className="search-button bg-blue-500 text-white px-4 py-2 rounded-md"
-            >
-              Search
-            </button>
-
-            
-            {error && <p className="error-message text-red-500">{error}</p>}
-
-         
-            {caretakers.length > 0 ? (
-              <ul className="caretaker-list mt-[25px]">
-                {caretakers.map((caretaker, index) => (
-                  <li key={index} className="caretaker-item">
-                    <h3>{caretaker.name}</h3>{" "}
-                    <h3>firstname:{caretaker.firstname}</h3>
-                   
-                    <p>Pincode: {caretaker.pincode}</p>{" "}
-                   
-                    <p>Status: {caretaker.status}</p>{" "}
-                 
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No caretakers found for this pincode</p>
-            )}
-          </div> */}
           <div className="">
             <div className="flex flex-row justify-between">
               <h2 className="text-xl font-semibold mb-4">
@@ -292,7 +220,10 @@ const DashboardCaretaker = () => {
                           Verified
                         </span>
                         <div className=" flex flex-row justify-center mt-[32px]">
-                          <button className=" w-32 h-10 bg-[#0c376f] text-white font-Poppins text-xl rounded-md">
+                          <button
+                            className=" w-32 h-10 bg-[#0c376f] text-white font-Poppins text-xl rounded-md"
+                            onClick={() => handleBookNow(caretaker._id)}
+                          >
                             Book Now
                           </button>
                         </div>

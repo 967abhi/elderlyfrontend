@@ -12,6 +12,7 @@ import Signupcaretaker from "../pages/Signupcaretaker";
 import Loginascaretaker from "../components/Login/Loginascaretaker";
 import DashboardCaretaker from "../pages/DashboardCaretaker";
 import Loginasuser from "../components/Login/Loginasuser";
+import UserFeed from "../pages/Userfeed";
 
 const AppRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const AppRoutes = () => {
           <Route path="/loginascaretaker" element={<Loginascaretaker />} />
           <Route path="/loginasuser" element={<Loginasuser />} />
           <Route path="/userfeed" element={<DashboardCaretaker />} />
+          <Route path="/userfeed/:id" element={<UserFeed />} />
         </Route>
       </Routes>
     </Router>

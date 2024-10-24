@@ -290,7 +290,10 @@ const DashboardCaretaker = () => {
                           Currently Unavailable
                         </span>
                       )}
-                      <div className="flex flex-row justify-center mt-[32px]">
+                      <div
+                        className="flex flex-row justify-center mt-[32px]"
+                        onClick={() => window.scrollTo(0, 0)}
+                      >
                         <button
                           className="w-32 h-10 bg-[#0c376f] text-white font-Poppins text-xl rounded-md"
                           onClick={() => handleBookNow(caretaker._id)}

@@ -13,6 +13,7 @@ import Loginascaretaker from "../components/Login/Loginascaretaker";
 import DashboardCaretaker from "../pages/DashboardCaretaker";
 import Loginasuser from "../components/Login/Loginasuser";
 import UserFeed from "../pages/Userfeed";
+import BookStatuspage from "../pages/BookStatuspage";
 
 const AppRoutes = () => {
   return (
@@ -29,6 +30,7 @@ const AppRoutes = () => {
           <Route path="/loginasuser" element={<Loginasuser />} />
           <Route path="/userfeed" element={<DashboardCaretaker />} />
           <Route path="/userfeed/:id" element={<UserFeed />} />
+          <Route path="/ordernow" element={<BookStatuspage />} />
         </Route>
       </Routes>
     </Router>

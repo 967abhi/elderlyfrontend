@@ -14,6 +14,7 @@ import DashboardCaretaker from "../pages/DashboardCaretaker";
 import Loginasuser from "../components/Login/Loginasuser";
 import UserFeed from "../pages/Userfeed";
 import BookStatuspage from "../pages/BookStatuspage";
+import Caretakerfeed from "../pages/Caretakerfeed";
 
 const AppRoutes = () => {
   return (
@@ -31,6 +32,7 @@ const AppRoutes = () => {
           <Route path="/userfeed" element={<DashboardCaretaker />} />
           <Route path="/userfeed/:id" element={<UserFeed />} />
           <Route path="/ordernow" element={<BookStatuspage />} />
+          <Route path="/dashboardcaretaker" element={<Caretakerfeed />} />
         </Route>
       </Routes>
     </Router>

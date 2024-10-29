@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./signupform.css";
 
-const Signupforcaretaker = ({ role }) => {
+const Signupforcaretaker = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstname: "",
@@ -26,7 +26,7 @@ const Signupforcaretaker = ({ role }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`${role} Signup Data:`, formData);
+    console.log(`Caretaker Signup Data:`, formData);
 
     // Ensure age and pincode are sent as numbers
     const dataToSend = {
@@ -62,7 +62,7 @@ const Signupforcaretaker = ({ role }) => {
       <div className="w-full rounded-lg shadow dark:border sm:max-w-md xl:p-0 bg-white">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-black">
-            Create an account as a {role}
+            Create an account as a Caretaker
           </h1>
           <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
             <div className="flex flex-row justify-between">
@@ -264,7 +264,7 @@ const Signupforcaretaker = ({ role }) => {
               type="submit"
               className="w-full text-white bg-green-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
-              Create an account as {role}
+              Create an account as Caretaker
             </button>
             <p className="text-base font-medium text-black ">
               Already have an account?{" "}

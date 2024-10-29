@@ -1254,8 +1254,8 @@ const BookingForm = () => {
           <div className="w-3/5">
             <label className="block text-gray-700">Current Address</label>
             <textarea
-              name="usercurrentAddress"
-              value={formData.usercurrentAddress}
+              name="usercurrentaddress"
+              value={formData.usercurrentaddress}
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-md"
               placeholder="Enter your address"

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import home from "../assets/feed.png";
 
 import { useNavigate } from "react-router";
+import CaretakerProfile from "./CaretakerProfile";
 
 // import { Shimmer } from "react-shimmer";
 
@@ -59,55 +60,7 @@ const Caretakerfeed = () => {
     },
   ];
 
-  // Fetch caretakers based on pincode
-  const fetchCaretakers = async () => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      console.error("No token found");
-      return;
-    }
-
-    try {
-      const response = await fetch("http://localhost:3000/enterthepincode", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ pincode }), // Send pincode in the request body
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.message);
-        throw new Error(data.message || "Error fetching caretakers");
-      }
-
-      console.log("Fetched caretakers data:", data);
-
-      if (data.data && Array.isArray(data.data)) {
-        setCaretakers(data.data); // Set caretakers to the state
-        setError(null); // Reset error
-      } else {
-        setError("No caretakers found");
-        console.error("Fetched data is not an array:", data);
-      }
-    } catch (error) {
-      console.error("Error fetching caretakers:", error);
-      setError("An error occurred while fetching caretakers.");
-    }
-  };
-
   // Handle search button click
-  const handleSearch = () => {
-    if (pincode) {
-      fetchCaretakers();
-    } else {
-      setError("Please enter a pincode");
-    }
-  };
 
   return (
     <section className=" ">
@@ -169,150 +122,15 @@ const Caretakerfeed = () => {
               </div>
             </div>
           </div>
-          <div className="">
-            <div className="flex flex-row justify-between">
-              <h2 className="text-xl font-semibold mb-4">
-                Search Caretakers by Pincode
-              </h2>
-              <input
-                type="text"
-                placeholder="Enter pincode"
-                value={pincode}
-                onChange={(e) => setPincode(e.target.value)}
-                className="pincode-input border border-gray-300 rounded-md p-2 mb-4 w-[400px]"
-              />
-              <button
-                onClick={handleSearch}
-                className="w-52 h-10 bg-[#0c376f] text-white font-Poppins text-xl rounded-md"
-              >
-                Search
-              </button>
+
+          {/* =============== */}
+          <div className="mt-32">
+            <div className="flex justify-center font-Poppins text-3xl font-semibold">
+              <h1>Wait for the arrival of the new booking</h1>
             </div>
-
-            {/* Show error message if any */}
-            {error && <p className="error-message text-red-500">{error}</p>}
-
-            {/* Display fetched caretaker data */}
-            {/* <S /> */}
-            {/* <ShimmerDiv mode="light" height={100} width={100} /> */}
-            {caretakers.length > 0 ? (
-              <div className="caretaker-list mt-6 flex flex-wrap    gap-4">
-                {caretakers.map((caretaker, index) => (
-                  // <div
-                  //   key={index}
-                  //   className={`caretaker-card  ${
-                  //     caretaker.status === "accepted"
-                  //       ? "bg-white  border-2   "
-                  //       : "bg-white"
-                  //   } shadow-lg rounded-lg p-4 flex flex-col md:flex-row items-start w-[380px] h-[280px] gap-8`}
-                  // >
-                  //   <img
-                  //     src={caretaker.imageUrl} // Ensure you have the correct URL for the image
-                  //     alt={`${caretaker.name}`}
-                  //     className="w-24 h-24 rounded-full border-2 border-green-500 mr-4"
-                  //   />
-
-                  //   <div className="flex flex-row justify-around font-Poppins leading-8">
-                  //     <div className="flex flex-col">
-                  //       <h3 className="text-lg font-bold">
-                  //         {caretaker.firstname}
-                  //       </h3>
-                  //       <p className="text-sm text-gray-500">
-                  //         {caretaker.address}
-                  //       </p>
-                  //       <p className="text-md font-semibold text-yellow-300">
-                  //         ★★★★ {caretaker.rating} ({caretaker.ratingCount}{" "}
-                  //         Ratings)
-                  //       </p>
-                  //       <p className="text-sm">
-                  //         Phone: {caretaker.phonenumber}
-                  //       </p>
-                  //       <p className="text-sm">
-                  //         Experience: {caretaker.experience} Years
-                  //       </p>
-                  //       <span className="bg-green-100 w-20 h-5 text-green-700 text-sm font-semibold flex justify-center text-center rounded-full mt-2">
-                  //         Verified
-                  //       </span>
-                  //       {caretaker.status === "accepted" && (
-                  //         <span className="text-red-500  text-sm mt-2 font-semibold">
-                  //           currently Unavailable
-                  //         </span>
-                  //       )}
-                  //       <div className="flex flex-row justify-center mt-[32px]">
-                  //         <button
-                  //           className="w-32 h-10 bg-[#0c376f] text-white font-Poppins text-xl rounded-md"
-                  //           onClick={() => handleBookNow(caretaker._id)}
-                  //         >
-                  //           Book Now
-                  //         </button>
-                  //       </div>
-                  //     </div>
-                  //   </div>
-                  // </div>
-                  <div
-                    key={index}
-                    className={`caretaker-card  ${
-                      caretaker.status === "accepted"
-                        ? "bg-white border-2"
-                        : "bg-white"
-                    } shadow-lg rounded-lg p-4 flex flex-col md:flex-row items-start w-[380px] h-[280px] gap-8`}
-                  >
-                    {/* Show Shimmer until the image is loaded */}
-
-                    {/* Show the image and hide the shimmer after the image is loaded */}
-                    <img
-                      src={caretaker.imageUrl} // Ensure you have the correct URL for the image
-                      alt={`${caretaker.name}`}
-                      className={`w-24 h-24 rounded-full border-2 border-green-500 mr-4 ${
-                        isImageLoaded ? "block" : "hidden"
-                      }`} // Hide the image until it has loaded
-                      onLoad={() => setIsImageLoaded(true)} // Once the image is loaded, update the state
-                    />
-
-                    <div className="flex flex-col justify-around font-Poppins leading-8">
-                      <h3 className="text-lg font-bold">
-                        {caretaker.firstname}
-                      </h3>
-                      <p className="text-sm text-gray-500">
-                        {caretaker.address}
-                      </p>
-                      <p className="text-md font-semibold text-yellow-300">
-                        ★★★★ {caretaker.rating} ({caretaker.ratingCount}{" "}
-                        Ratings)
-                      </p>
-                      <p className="text-sm">Phone: {caretaker.phonenumber}</p>
-                      <p className="text-sm">
-                        Experience: {caretaker.experience} Years
-                      </p>
-                      <span className="bg-green-100 w-20 h-5 text-green-700 text-sm font-semibold flex justify-center text-center rounded-full mt-2">
-                        Verified
-                      </span>
-                      {caretaker.status === "accepted" && (
-                        <span className="text-red-500 text-sm mt-2 font-semibold">
-                          Currently Unavailable
-                        </span>
-                      )}
-                      <div
-                        className="flex flex-row justify-center mt-[32px]"
-                        onClick={() => window.scrollTo(0, 0)}
-                      >
-                        <button
-                          className="w-32 h-10 bg-[#0c376f] text-white font-Poppins text-xl rounded-md"
-                          onClick={() => handleBookNow(caretaker._id)}
-                        >
-                          Book Now
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                {/* <div>
-                  <CaretakerCard caretaker={caretakers} />
-                </div> */}
-              </div>
-            ) : (
-              <p>No caretakers found for this pincode</p>
-            )}
+            <div className="flex w-full shadow-md bg-white">
+              <CaretakerProfile />
+            </div>
           </div>
           {/* =============== */}
         </div>

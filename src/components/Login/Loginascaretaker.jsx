@@ -102,7 +102,8 @@ const Loginascaretaker = ({ role }) => {
             <p className="text-base font-medium text-black">
               Don't have an account?{" "}
               <a
-                href="/signupascaretaker"
+                href="/singupascaretaker"
+                // singupascaretaker
                 className="font-medium text-primary-600 hover:underline dark:text-primary-500"
               >
                 Sign up here

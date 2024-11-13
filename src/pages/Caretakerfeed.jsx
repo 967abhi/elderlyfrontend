@@ -125,10 +125,7 @@ const Caretakerfeed = () => {
 
           {/* =============== */}
           <div className="mt-32">
-            <div className="flex justify-center font-Poppins text-3xl font-semibold">
-              <h1>Wait for the arrival of the new booking</h1>
-            </div>
-            <div className="flex w-full shadow-md bg-white">
+            <div className="flex w-full  bg-white">
               <CaretakerProfile />
             </div>
           </div>

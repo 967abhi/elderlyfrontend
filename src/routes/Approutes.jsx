@@ -23,7 +23,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />{" "}
           {/* Home page will render inside Layout */}
-          <Route path="about" element={<About />} />
+          <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/signupasuser" element={<SignupuserPage />} />
           <Route path="/singupascaretaker" element={<Signupcaretaker />} />
@@ -31,7 +31,7 @@ const AppRoutes = () => {
           <Route path="/loginasuser" element={<Loginasuser />} />
           <Route path="/userfeed" element={<DashboardCaretaker />} />
           <Route path="/userfeed/:id" element={<UserFeed />} />
-          <Route path="/ordernow" element={<BookStatuspage />} />
+          <Route path="/ordernow/:id" element={<BookStatuspage />} />
           <Route path="/dashboardcaretaker" element={<Caretakerfeed />} />
         </Route>
       </Routes>

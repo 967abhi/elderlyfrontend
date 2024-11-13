@@ -10,6 +10,7 @@ const Signupforcaretaker = () => {
     email: "",
     password: "",
     phonenumber: "",
+    description: "",
     age: "",
     gender: "",
     address: "",
@@ -58,7 +59,7 @@ const Signupforcaretaker = () => {
   };
 
   return (
-    <section className="bg-gray-50 dark:bg-white flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 w-[1200px]">
+    <section className="bg-gray-50 dark:bg-white flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 mt-16 w-[1200px]">
       <div className="w-full rounded-lg shadow dark:border sm:max-w-md xl:p-0 bg-white">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-black">
@@ -136,6 +137,24 @@ const Signupforcaretaker = () => {
                 onChange={handleChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="••••••••"
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="text"
+                className="block mb-2 text-sm font-medium font-Poppins text-black"
+              >
+                Description
+              </label>
+              <input
+                type="text"
+                name="description"
+                id="description"
+                value={formData.description}
+                onChange={handleChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Write your description"
                 required
               />
             </div>

@@ -11,6 +11,7 @@ const SignupForm = ({ role }) => {
     password: "",
     phonenumber: "",
     age: "",
+    description: "",
     gender: "",
     address: "",
     pincode: "",
@@ -136,6 +137,24 @@ const SignupForm = ({ role }) => {
                 onChange={handleChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="••••••••"
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="text"
+                className="block mb-2 text-sm font-medium font-Poppins text-black"
+              >
+                Description
+              </label>
+              <input
+                type="text"
+                name="description"
+                id="description"
+                value={formData.description}
+                onChange={handleChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="write about yourself"
                 required
               />
             </div>

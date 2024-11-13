@@ -185,7 +185,7 @@
 // // };
 
 // // export default CaretakerProfile;
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const CaretakerProfile = () => {
@@ -208,6 +208,7 @@ const CaretakerProfile = () => {
         });
 
         const data = response.data.user;
+        console.log(data);
         setCaretakerData(data);
       } catch (err) {
         setError("Failed to fetch caretaker data.");
@@ -225,92 +226,132 @@ const CaretakerProfile = () => {
   if (!caretakerData) {
     return <div>Loading...</div>;
   }
+  const startTime = caretakerData.userstartingtime.slice(-1)[0];
+  const endTime = caretakerData.userendingtime.slice(-1)[0];
+
+  // Convert them to Date objects
+  const startDate = new Date(startTime);
+  const endDate = new Date(endTime);
+
+  // Format the dates in a human-readable format (you can customize this format)
+  const formattedStartTime = startDate.toLocaleString(); // Local date format
+  const formattedEndTime = endDate.toLocaleString();
 
   return (
     <div className="caretaker-profile">
-      <h2>Caretaker Profile</h2>
-      <p>
-        <strong>First Name:</strong> {caretakerData.firstName}
-      </p>
-      <p>
-        <strong>Last Name:</strong> {caretakerData.lastName}
-      </p>
-      <p>
-        <strong>Age:</strong> {caretakerData.age}
-      </p>
-      <p>
-        <strong>Email:</strong> {caretakerData.email}
-      </p>
-      <p>
-        <strong>Address:</strong> {caretakerData.address}
-      </p>
-      <p>
-        <strong>Phone Number:</strong> {caretakerData.phoneNumber}
-      </p>
-      <p>
-        <strong>Pincode:</strong> {caretakerData.pincode}
-      </p>
-      <p>
-        <strong>Status:</strong> {caretakerData.status}
-      </p>
-      <p>
-        <strong>Created At:</strong>{" "}
-        {new Date(caretakerData.createdAt).toLocaleDateString()}
-      </p>
+      <h2 className="mt-10 font-Poppins text-xl font-bold ">
+        Welcome {caretakerData.firstname}
+      </h2>
+      <div className="flex mt-10 gap-10 ">
+        <div className="w-[550px] ">
+          <img src={caretakerData.imageUrl} alt="" />
+        </div>
+        <div className="flex flex-col gap-9 font-Poppins text-xl ">
+          <p>
+            <strong>First Name:</strong> {caretakerData.firstname}
+          </p>
+          <p>
+            <strong>Last Name:</strong> {caretakerData.lastname}
+          </p>
+          <p>
+            <strong>Age:</strong> {caretakerData.age}
+          </p>
+          <p>
+            <strong>Email:</strong> {caretakerData.email}
+          </p>
+          <p>
+            <strong>Address:</strong> {caretakerData.address}
+          </p>
+          <p>
+            <strong>Phone Number:</strong> {caretakerData.phonenumber}
+          </p>
+          <p>
+            <strong>Pincode:</strong> {caretakerData.pincode}
+          </p>
+          <p>
+            <strong>Status:</strong> {caretakerData.status}
+          </p>
+          <p>
+            <strong>Created At:</strong>{" "}
+            {new Date(caretakerData.createdAt).toLocaleDateString()}
+          </p>
+        </div>
+      </div>
+      <div className=" mt-24 flex justify-center font-Poppins text-3xl font-semibold">
+        <h1>Wait for the arrival of the new booking</h1>
+      </div>
+      <div className="mt-24 flex gap-4 shadow-md bg-white rounded-2xl h-[600px] overflow-x-hidden">
+        <div className="w-[450px] ">
+          <img src={caretakerData.imageUrl} alt="" />
+        </div>
+        <div className="flex flex-col gap-5 font-Poppins">
+          <p>
+            <strong>User First Name:</strong>{" "}
+            {caretakerData.userfirstname.slice(-1)[0]}
+          </p>
+          <p>
+            <strong>User Last Name:</strong>{" "}
+            {caretakerData.userlastname.slice(-1)[0]}
+          </p>
+          <p>
+            <strong>User Phone Number:</strong>{" "}
+            {caretakerData.userphonenumber.slice(-1)[0]}
+          </p>
+          <p>
+            <strong>User Pincode:</strong>{" "}
+            {caretakerData.userpincode.slice(-1)[0]}
+          </p>
 
-      <p>
-        <strong>Current Address:</strong>
-      </p>
-      <ul>
-        {caretakerData.usercurrentaddress.map((address, index) => (
-          <li key={index}>{address}</li>
-        ))}
-      </ul>
+          <p className="flex gap-2">
+            <strong>User Email:</strong>
 
-      <p>
-        <strong>Duration:</strong>
-      </p>
-      <ul>
-        {caretakerData.userduration.slice(-1).map((duration, index) => (
-          <li key={index}>{duration}</li>
-        ))}
-      </ul>
+            <ul>
+              {caretakerData.useremail.slice(-1).map((email, index) => (
+                <li key={index}>{email}</li>
+              ))}
+            </ul>
+          </p>
+          <p className="flex gap-2">
+            <strong>Duration:</strong>
 
-      <p>
-        <strong>User Email:</strong>
-      </p>
-      <ul>
-        {caretakerData.useremail.slice(-1).map((email, index) => (
-          <li key={index}>{email}</li>
-        ))}
-      </ul>
+            <ul>
+              {caretakerData.userduration.slice(-1).map((duration, index) => (
+                <li key={index}>{duration} Hour</li>
+              ))}
+            </ul>
+          </p>
+          <p>
+            <strong>Price:</strong> {caretakerData.userprice.slice(-1)[0]}{" "}
+            &#8377;
+          </p>
+          <p className="flex gap-2">
+            <strong>Current Address:</strong>
 
-      <p>
-        <strong>User First Name:</strong>{" "}
-        {caretakerData.userfirstname.slice(-1)[0]}
-      </p>
-      <p>
-        <strong>User Last Name:</strong>{" "}
-        {caretakerData.userlastname.slice(-1)[0]}
-      </p>
-      <p>
-        <strong>User Phone Number:</strong>{" "}
-        {caretakerData.userphonenumber.slice(-1)[0]}
-      </p>
-      <p>
-        <strong>User Pincode:</strong> {caretakerData.userpincode.slice(-1)[0]}
-      </p>
-      <p>
-        <strong>Price:</strong> {caretakerData.userprice.slice(-1)[0]}
-      </p>
-      <p>
-        <strong>Ending Time:</strong>{" "}
-        {caretakerData.userendingtime.slice(-1)[0]}
-      </p>
-      <p>
-        <strong>Starting Time:</strong>{" "}
-        {caretakerData.userstartingtime.slice(-1)[0]}
-      </p>
+            <ul className="w-[550px]">
+              {caretakerData.usercurrentaddress
+                .slice(-1)
+                .map((address, index) => (
+                  <li key={index}>{address}</li>
+                ))}
+            </ul>
+          </p>
+          <p>
+            <strong>Starting Time:</strong> {formattedStartTime}
+          </p>
+
+          <p>
+            <strong>Ending Time:</strong> {formattedEndTime}
+          </p>
+          <div className="flex gap-4">
+            <div className="w-32 flex justify-center bg-green-500 rounded-md">
+              <button className="font-Poppins text-xl">Accept</button>
+            </div>
+            <div className="w-32 flex justify-center bg-red-500 rounded-md">
+              <button className="font-Poppins text-xl">Reject</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -15,6 +15,7 @@ import Loginasuser from "../components/Login/Loginasuser";
 import UserFeed from "../pages/Userfeed";
 import BookStatuspage from "../pages/BookStatuspage";
 import Caretakerfeed from "../pages/Caretakerfeed";
+import Contact from "../pages/Contact";
 
 const AppRoutes = () => {
   return (
@@ -33,6 +34,7 @@ const AppRoutes = () => {
           <Route path="/userfeed/:id" element={<UserFeed />} />
           <Route path="/ordernow/:id" element={<BookStatuspage />} />
           <Route path="/dashboardcaretaker" element={<Caretakerfeed />} />
+          <Route path="/contact" element={<Contact />} />
         </Route>
       </Routes>
     </Router>

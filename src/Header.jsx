@@ -99,11 +99,11 @@ const Header = () => {
                   Contact
                 </li>
               </Link>
-              <Link to="/game">
+              {/* <Link to="/game">
                 <li className="text-black font-medium text-[16px] font-Poppins hover:text-gray-900 focus:outline-none">
                   Game{" "}
                 </li>
-              </Link>
+              </Link> */}
             </ul>
             <div className="relative">
               <button

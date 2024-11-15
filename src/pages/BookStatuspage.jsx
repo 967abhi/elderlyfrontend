@@ -48,7 +48,22 @@ const BookStatuspage = () => {
 
     if (id) fetchUserDetails(); // Only fetch if id is available
   }, [id]);
+  const [status, setStatus] = useState("Pending");
 
+  const fetchStatus = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/status");
+      setStatus(response.data.status);
+    } catch (error) {
+      console.error("Error fetching status:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStatus(); // Fetch status on component mount
+    const interval = setInterval(fetchStatus, 3000); // Poll every 3 seconds
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
   return (
     <div className="container mx-auto px-4 h-full max-w-screen-xl ">
       <div className="mt-8">
@@ -81,6 +96,7 @@ const BookStatuspage = () => {
           <p>
             <strong>Price:</strong> {userDetails.userprice.slice(-1)[0]} &#8377;
           </p>
+          <p></p>
         </div>
       </div>
       <div className="mt-8 flex flex-col gap-10">

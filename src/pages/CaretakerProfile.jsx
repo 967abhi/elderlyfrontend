@@ -236,12 +236,23 @@ const CaretakerProfile = () => {
   // Format the dates in a human-readable format (you can customize this format)
   const formattedStartTime = startDate.toLocaleString(); // Local date format
   const formattedEndTime = endDate.toLocaleString();
+  // const handleAction = async (action) => {
+  //   try {
+  //     const response = await axios.post("http://localhost:3000/status", {
+  //       action,
+  //     });
+  //     alert(response.data.message); // Display success message
+  //   } catch (error) {
+  //     console.error("Error updating status:", error);
+  //   }
+  // };
 
   return (
     <div className="caretaker-profile">
       <h2 className="mt-10 font-Poppins text-xl font-bold ">
         Welcome {caretakerData.firstname}
       </h2>
+
       <div className="flex mt-10 gap-10 ">
         <div className="w-[550px] ">
           <img src={caretakerData.imageUrl} alt="" />
@@ -250,6 +261,9 @@ const CaretakerProfile = () => {
           <p>
             <strong>First Name:</strong> {caretakerData.firstname}
           </p>
+          {/* <p>
+            <strong>id:</strong> {caretakerData._id}
+          </p> */}
           <p>
             <strong>Last Name:</strong> {caretakerData.lastname}
           </p>
@@ -350,6 +364,21 @@ const CaretakerProfile = () => {
               <button className="font-Poppins text-xl">Reject</button>
             </div>
           </div>
+
+          {/* <div className="space-x-4">
+            <button
+              onClick={() => handleAction("accept")}
+              className="bg-green-500 text-white px-4 py-2 rounded"
+            >
+              Accept
+            </button>
+            <button
+              onClick={() => handleAction("reject")}
+              className="bg-red-500 text-white px-4 py-2 rounded"
+            >
+              Reject
+            </button>
+          </div> */}
         </div>
       </div>
     </div>

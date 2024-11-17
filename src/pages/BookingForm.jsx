@@ -239,6 +239,7 @@ const BookingForm = () => {
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-md"
+            onClick={() => window.scroll(0, 0)}
           >
             Submit
           </button>

@@ -4,7 +4,7 @@ import SignupForm from "../components/SignupForm";
 
 const SignupuserPage = () => {
   return (
-    <div className="signup-page">
+    <div className="signup-page mt-12">
       <div className="signup-sections">
         <SignupForm role="User" />
         {/* <Singupforcaretaker role="caretaker" /> */}

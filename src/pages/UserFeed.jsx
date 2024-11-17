@@ -143,7 +143,7 @@ const UserFeed = () => {
                       <h2 className="text-3xl font-bold text-gray-800 mb-4">
                         Basic Plan
                       </h2>
-                      <p className="text-gray-600 mb-6">Hourly Price</p>
+                      <p className="text-gray-600 mb-6">Weekly Price</p>
                       <p className="text-4xl font-bold text-gray-800 mb-6">
                         &#8377; {caretaker.weeklyprice}
                       </p>
@@ -163,7 +163,7 @@ const UserFeed = () => {
                               d="M5 13l4 4L19 7"
                             />
                           </svg>
-                          7 Days of Caretaker
+                          Book for 7 Days
                         </li>
                         <li className="mb-2 flex items-center">
                           <svg

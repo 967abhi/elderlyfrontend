@@ -285,7 +285,10 @@ const SignupForm = ({ role }) => {
             >
               Create an account as {role}
             </button>
-            <p className="text-base font-medium text-black ">
+            <p
+              className="text-base font-medium text-black "
+              onClick={() => window.scrollTo(0, 0)}
+            >
               Already have an account?{" "}
               <Link
                 to="/loginasuser"
